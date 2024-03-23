@@ -1,40 +1,26 @@
 package com.projects.queue.DTOs;
 
+import java.util.List;
+
 public class QuestionDTO {
     private String title;
-    private String description;
-    private String author;
-    private String authorEmail;
-    private String tags;
+    private String text;
+    // TODO: private List<String> tags;
 
     public QuestionDTO() {
     }
 
-    public QuestionDTO(String title, String description, String author, String authorEmail, String tags) {
+    public QuestionDTO(String title, String description, Long author, String authorEmail) {
         this.title = title;
-        this.description = description;
-        this.author = author;
-        this.authorEmail = authorEmail;
-        this.tags = tags;
+        this.text = description;
+        //this.tags = tags;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getAuthorEmail() {
-        return authorEmail;
-    }
-
-    public String getTags() {
-        return tags;
+    public String getText() {
+        return text;
     }
 }

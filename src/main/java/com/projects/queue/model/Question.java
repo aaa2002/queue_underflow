@@ -3,6 +3,7 @@ package com.projects.queue.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class Question {
     private User user;
     private String title;
     private String text;
-    private Date createdAt;
+    private Instant createdAt;
     // LOB: Large Object
     @Lob
-    private byte[] image;
+    private Byte[] image;
+    private Integer score;
     // TODO: Tags
     // TODO: Answers
     // TODO: likers
@@ -30,7 +32,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(Long id, User user, String title, String text, Date createdAt, byte[] image) {
+    public Question(Long id, User user, String title, String text, Instant createdAt, Byte[] image) {
         this.user = user;
         this.title = title;
         this.text = text;
@@ -66,19 +68,35 @@ public class Question {
         this.text = text;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getCreatedAt() {
+        return createdAt.toString();
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public byte[] getImage() {
+    public Byte[] getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Byte[] image) {
         this.image = image;
+    }
+
+    public void setAuthor(User user) {
+        this.user = user;
+    }
+
+    public User getAuthor() {
+        return user;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }

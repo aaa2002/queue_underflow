@@ -1,4 +1,4 @@
-package com.projects.queue.DTOs;
+package com.projects.queue.DTOs.user;
 
 import com.projects.queue.model.AccountStatus;
 import com.projects.queue.model.Role;

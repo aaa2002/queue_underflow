@@ -1,4 +1,4 @@
-package com.projects.queue.DTOs;
+package com.projects.queue.DTOs.question;
 
 import java.util.List;
 

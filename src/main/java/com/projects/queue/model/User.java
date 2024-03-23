@@ -24,7 +24,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private List<Question> questions;
-    // TODO: add questions and answers
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Answer> answers;
+
     public void setId(Long id) {
         this.id = id;
     }

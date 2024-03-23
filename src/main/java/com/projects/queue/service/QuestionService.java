@@ -1,7 +1,7 @@
 package com.projects.queue.service;
 
-import com.projects.queue.DTOs.QuestionDTO;
-import com.projects.queue.DTOs.UpdateQuestionDTO;
+import com.projects.queue.DTOs.question.QuestionDTO;
+import com.projects.queue.DTOs.question.UpdateQuestionDTO;
 import com.projects.queue.model.Question;
 import com.projects.queue.model.User;
 

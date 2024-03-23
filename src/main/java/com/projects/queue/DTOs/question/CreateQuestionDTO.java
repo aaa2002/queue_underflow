@@ -1,6 +1,6 @@
-package com.projects.queue.DTOs;
+package com.projects.queue.DTOs.question;
 
-public class QuestionCreationDTO {
+public class CreateQuestionDTO {
     public QuestionDTO questionDTO;
     public Long userId;
 

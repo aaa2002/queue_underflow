@@ -1,4 +1,4 @@
-package com.projects.queue.DTOs;
+package com.projects.queue.DTOs.question;
 
 public class UpdateQuestionDTO {
     private Long id;

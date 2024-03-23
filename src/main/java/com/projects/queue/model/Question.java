@@ -1,5 +1,7 @@
 package com.projects.queue.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +18,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
     private String title;
     private String text;
@@ -82,14 +86,6 @@ public class Question {
 
     public void setImage(Byte[] image) {
         this.image = image;
-    }
-
-    public void setAuthor(User user) {
-        this.user = user;
-    }
-
-    public User getAuthor() {
-        return user;
     }
 
     public Integer getScore() {

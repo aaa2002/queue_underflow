@@ -1,5 +1,6 @@
 package com.projects.queue.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -29,7 +30,9 @@ public class Question {
     private Byte[] image;
     private Integer score;
     // TODO: Tags
-    // TODO: Answers
+    @OneToMany(mappedBy = "question")
+    @JsonBackReference
+    private List<Answer> answers;
     // TODO: likers
     // TODO: dislikers
 

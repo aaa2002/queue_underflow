@@ -1,9 +1,8 @@
 package com.projects.queue.controller;
 
 
-import com.projects.queue.DTOs.QuestionCreationDTO;
-import com.projects.queue.DTOs.QuestionDTO;
-import com.projects.queue.DTOs.UpdateQuestionDTO;
+import com.projects.queue.DTOs.question.CreateQuestionDTO;
+import com.projects.queue.DTOs.question.UpdateQuestionDTO;
 import com.projects.queue.model.Question;
 import com.projects.queue.model.User;
 import com.projects.queue.service.QuestionService;
@@ -24,10 +23,10 @@ public class QuestionController {
     private UserService userService;
 
     @PostMapping("/create")
-    public void createQuestion(@RequestBody QuestionCreationDTO questionCreationDTO) {
-        User user = userService.getUserById(questionCreationDTO.userId);
+    public void createQuestion(@RequestBody CreateQuestionDTO createQuestionDTO) {
+        User user = userService.getUserById(createQuestionDTO.userId);
 
-        questionService.createQuestion(questionCreationDTO.questionDTO, user);
+        questionService.createQuestion(createQuestionDTO.questionDTO, user);
     }
 
     @PostMapping("/update")

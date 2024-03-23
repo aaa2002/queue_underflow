@@ -1,11 +1,10 @@
 package com.projects.queue.controller;
 
-import com.projects.queue.DTOs.CreateUserDTO;
-import com.projects.queue.DTOs.LoginDTO;
-import com.projects.queue.DTOs.UpdateUserDTO;
+import com.projects.queue.DTOs.user.CreateUserDTO;
+import com.projects.queue.DTOs.user.LoginDTO;
+import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.User;
 import com.projects.queue.service.UserService;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

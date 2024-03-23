@@ -1,7 +1,7 @@
 package com.projects.queue.service;
 
-import com.projects.queue.DTOs.CreateUserDTO;
-import com.projects.queue.DTOs.UpdateUserDTO;
+import com.projects.queue.DTOs.user.CreateUserDTO;
+import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.AccountStatus;
 import com.projects.queue.model.User;
 import com.projects.queue.repository.UserRepository;

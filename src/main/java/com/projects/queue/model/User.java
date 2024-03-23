@@ -1,8 +1,11 @@
 package com.projects.queue.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -18,8 +21,10 @@ public class User {
     private Integer score;
     private Role role;
     private AccountStatus accountStatus;
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Question> questions;
     // TODO: add questions and answers
-
     public void setId(Long id) {
         this.id = id;
     }

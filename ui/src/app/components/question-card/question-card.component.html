@@ -1,0 +1,28 @@
+<div class="question-card-wrapper">
+  <mat-card class="question-card">
+    <mat-card-title>
+      <span>Title: {{questionObject.title}}</span>
+    </mat-card-title>
+    <mat-card-content>
+      <span>User: {{ questionObject.user.name }}</span>
+      <span>User Score: {{ questionObject.user.score }}</span>
+      <span>Date: {{questionObject.createdAt}}</span>
+      <span>Text: {{questionObject.text}}</span>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="button-square-container">
+        <button mat-mini-fab color="primary" aria-label="Upvote">
+          <mat-icon>plus_one</mat-icon>
+        </button>
+      </div>
+      <mat-chip color="accent" class="question-score">
+        {{questionObject.score}}
+      </mat-chip>
+      <div class="button-square-container">
+        <button mat-mini-fab color="warn" aria-label="Downvote">
+          <mat-icon>exposure_neg_1</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

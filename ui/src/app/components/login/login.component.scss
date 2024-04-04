@@ -1,0 +1,21 @@
+@import "../../helpers/constants";
+
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("https://cdn.britannica.com/30/199930-131-B3D1D347/computer.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.login-card {
+  width: 25%;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

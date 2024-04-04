@@ -1,0 +1,15 @@
+.question-card {
+  margin-bottom: 2rem;
+
+
+  .mat-mdc-card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .mat-mdc-card-title {
+    margin-left: 1rem;
+  }
+  .question-score {
+    margin: 0 1rem;
+  }
+}

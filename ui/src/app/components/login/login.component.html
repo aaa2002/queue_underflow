@@ -1,0 +1,22 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-content>
+      <span class="login-title">Login</span>
+      <form (submit)="$event">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="johndoe@mail.com">
+          <mat-icon matSuffix>email</mat-icon>
+          <!--    <mat-hint>Hint</mat-hint>-->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password">
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" color="accent">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

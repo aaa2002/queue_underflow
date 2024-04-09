@@ -10,12 +10,15 @@
   background-size: cover;
 }
 
-.login-card {
-  width: 25%;
+.form-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .login-title {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  width: 100%;
 }

@@ -1,0 +1,30 @@
+<div class="main-wrapper">
+  <mat-toolbar>
+    <div class="toolbar-left-side">
+      <button mat-icon-button (click)="toggleDrawer()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My App</span>
+    </div>
+    <div class="toolbar-right-side">
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
+      </button>
+      <span class="active-user">{{getActiveUser()}}</span>
+      <mat-menu #userMenu="matMenu">
+        <!--        <button mat-menu-item>Profile</button>-->
+        <!--        <button mat-menu-item>Settings</button>-->
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer #drawer class="drawer">
+      <!-- Add content for the drawer here -->
+      Drawer Content
+    </mat-drawer>
+    <div class="content">
+      <app-questions></app-questions>
+    </div>
+  </mat-drawer-container>
+</div>

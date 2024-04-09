@@ -1,18 +1,23 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-content>
-      <span class="login-title">Login</span>
-      <form (submit)="$event">
+      <span class="login-title">{{registerForm ? 'Register' : 'Login'}}</span>
+      <form (submit)="submitForm()" class="form-content">
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="johndoe@mail.com">
+          <input matInput placeholder="johndoe@mail.com" name="email" [(ngModel)]="formData.email">
           <mat-icon matSuffix>email</mat-icon>
-          <!--    <mat-hint>Hint</mat-hint>-->
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password">
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="formData.password">
           <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="registerForm" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Name" name="name" [(ngModel)]="formData.name">
+          <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
         <button mat-flat-button type="submit" color="accent">Submit</button>

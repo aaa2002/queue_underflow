@@ -1,4 +1,4 @@
 <div>
-<!--  <app-login></app-login>-->
-  <app-questions></app-questions>
+  <app-login *ngIf="!isUserActive()"></app-login> <!-- [registerForm]="true"-->
+  <app-main-wrapper *ngIf="isUserActive()"></app-main-wrapper>
 </div>

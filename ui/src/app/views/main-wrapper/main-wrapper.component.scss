@@ -1,0 +1,32 @@
+.main-wrapper {
+  height: 100%;
+}
+
+.mat-drawer-container {
+  height: 100%;
+}
+
+.content {
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+
+.drawer {
+  width: 240px;
+  padding: 24px;
+}
+
+.toolbar-left-side {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-right-side {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  .active-user {
+    margin: 0 8px;
+  }
+}

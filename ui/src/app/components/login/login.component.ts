@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
@@ -7,6 +7,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 
 interface registerFormData {
   name: string;
@@ -26,7 +28,7 @@ interface registerFormData {
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   @Input() registerForm: boolean = false;
   formData: registerFormData = {
     name: '',
@@ -35,6 +37,14 @@ export class LoginComponent {
     bio: '',
     role: 0
   };
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.registerForm = data['registerForm'] || false;
+    });
+  }
 
   submitForm() {
     switch (this.registerForm) {
@@ -75,12 +85,14 @@ export class LoginComponent {
           })
         })
           .then(response => {
+            console.log("here")
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
             if (response.status === 200) {
               console.log('Login successful');
               localStorage.setItem('activeUser', this.formData.email);
+              this.router.navigate(['/main']).then(r => console.log(r));
             }
             return response;
           })

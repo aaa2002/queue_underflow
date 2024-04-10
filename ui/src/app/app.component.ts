@@ -14,6 +14,9 @@ import {MainWrapperComponent} from "./views/main-wrapper/main-wrapper.component"
 })
 export class AppComponent {
   isUserActive(): boolean {
-    return !!localStorage.getItem('activeUser');
+    if (typeof localStorage !== 'undefined') {
+      return !!localStorage.getItem('activeUser');
+    }
+    return false;
   }
 }

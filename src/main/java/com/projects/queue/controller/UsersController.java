@@ -68,4 +68,10 @@ public class UsersController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @GetMapping("/user/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        System.out.println(userService.getUserByEmail(email));
+        return userService.getUserByEmail(email);
+    }
 }

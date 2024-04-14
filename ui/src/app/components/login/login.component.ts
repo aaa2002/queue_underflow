@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
             if (response.status === 200) {
               console.log('Login successful');
               localStorage.setItem('activeUser', this.formData.email);
-              this.router.navigate(['/main']).then(r => console.log(r));
+              this.router.navigate(['/main/questions']).then(r => console.log(r));
             }
             return response;
           })

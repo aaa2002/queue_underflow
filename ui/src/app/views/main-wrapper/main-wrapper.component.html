@@ -12,19 +12,17 @@
       </button>
       <span class="active-user">{{getActiveUser()}}</span>
       <mat-menu #userMenu="matMenu">
-        <!--        <button mat-menu-item>Profile</button>-->
-        <!--        <button mat-menu-item>Settings</button>-->
+        <button mat-menu-item (click)="openProfile()">Profile</button>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </div>
   </mat-toolbar>
   <mat-drawer-container class="drawer-container">
     <mat-drawer #drawer class="drawer">
-      <!-- Add content for the drawer here -->
-      Drawer Content
+      <button mat-menu-item [routerLink]="'/main/questions'"><mat-icon>home</mat-icon>Home</button>
     </mat-drawer>
     <div class="content">
-      <app-questions></app-questions>
+      <router-outlet></router-outlet>
     </div>
   </mat-drawer-container>
 </div>

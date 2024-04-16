@@ -98,4 +98,16 @@ public class Question {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id +
+                ", \"user\": " + (user != null ? user.getId() : null) +
+                ", \"title\": \"" + title + '\"' +
+                ", \"text\": \"" + text + '\"' +
+                ", \"createdAt\": \"" + createdAt + '\"' +
+                ", \"score\": " + score +
+                '}';
+    }
 }

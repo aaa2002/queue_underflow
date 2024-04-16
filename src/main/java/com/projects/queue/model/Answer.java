@@ -67,4 +67,17 @@ public class Answer {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id +
+                ", \"user\": " + (user != null ? user.getId() : null) +
+                ", \"text\": \"" + text + '\"' +
+                ", \"question\": " + (question != null ? question.getId() : null) +
+                ", \"createdAt\": \"" + createdAt + '\"' +
+                ", \"score\": " + score +
+                '}';
+    }
+
 }

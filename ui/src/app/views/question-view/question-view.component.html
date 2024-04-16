@@ -1,11 +1,19 @@
 <mat-card class="my-2 mx-2" *ngIf="questionData.user">
   <mat-card-header>
-    <mat-icon mat-card-avatar class="avatar" [style.color]="questionData.user.avatar">person</mat-icon>
+    <mat-icon mat-card-avatar class="avatar" [style.color]="authorData.avatar">person</mat-icon>
     <mat-card-title>{{ questionData.title }}</mat-card-title>
-    <mat-card-subtitle>Asked by {{ questionData.user.name }}</mat-card-subtitle>
+    <mat-card-subtitle>Asked by {{ authorData.name }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>{{ questionData.text }}</p>
+    <div class="answers-wrapper">
+      <mat-card *ngFor="let answer of answers" class="mb-1" style="background: #DDDDDD">
+        <mat-card-content>
+          <p>{{ answer.text }}</p>
+          <mat-card-subtitle>Answered by {{ answer.user.name }}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <!-- Add any actions/buttons here if needed -->

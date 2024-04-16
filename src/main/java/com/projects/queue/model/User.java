@@ -36,4 +36,20 @@ public class User {
     public Long getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id +
+                ", \"name\": \"" + name + '\"' +
+                ", \"email\": \"" + email + '\"' +
+                ", \"password\": \"" + password + '\"' +
+                ", \"bio\": \"" + bio + '\"' +
+                ", \"score\": " + score +
+                ", \"avatar\": \"" + avatar + '\"' +
+                ", \"role\": \"" + role + '\"' +
+                ", \"accountStatus\": \"" + accountStatus + '\"' +
+                '}';
+    }
+
 }

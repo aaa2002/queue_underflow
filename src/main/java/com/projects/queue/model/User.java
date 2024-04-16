@@ -19,6 +19,7 @@ public class User {
     private String password;
     private String bio;
     private Integer score;
+    private String avatar;
     private Role role;
     private AccountStatus accountStatus;
     @OneToMany(mappedBy = "user")

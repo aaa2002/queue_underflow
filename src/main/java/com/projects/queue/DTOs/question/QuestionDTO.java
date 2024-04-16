@@ -10,7 +10,7 @@ public class QuestionDTO {
     public QuestionDTO() {
     }
 
-    public QuestionDTO(String title, String description, Long author, String authorEmail) {
+    public QuestionDTO(String title, String description) {
         this.title = title;
         this.text = description;
         //this.tags = tags;

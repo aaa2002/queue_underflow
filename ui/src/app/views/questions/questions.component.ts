@@ -51,4 +51,32 @@ export class QuestionsComponent {
       "score": 0
     }
   ];
+
+  questions: any;
+
+  constructor() {
+  }
+
+  ngOnInit() {
+    this.fetchQuestions();
+  }
+
+  fetchQuestions(): any {
+    fetch('http://localhost:8080/questions/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch questions');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        this.questions = data;
+        return data;
+      })
+      .catch(error => {
+        console.error('Error fetching questions:', error);
+        throw error;
+      });
+  }
 }

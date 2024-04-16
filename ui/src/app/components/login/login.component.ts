@@ -5,6 +5,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {MatMenuModule} from '@angular/material/menu';
 import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
@@ -16,6 +17,7 @@ interface registerFormData {
   password: string;
   bio?: string;
   role?: number;
+  avatar?: string;
 }
 
 @Component({
@@ -23,7 +25,7 @@ interface registerFormData {
   standalone: true,
   imports: [
     MatFormField,
-    MatLabel, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatDividerModule, MatIconModule, MatCardModule, NgIf, FormsModule
+    MatLabel, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatDividerModule, MatIconModule, MatCardModule, NgIf, FormsModule, MatMenuModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
     bio: '',
-    role: 0
+    role: 0,
+    avatar: 'darkgrey'
   };
 
   constructor(private route: ActivatedRoute, private router: Router) { }
@@ -44,6 +47,15 @@ export class LoginComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.registerForm = data['registerForm'] || false;
     });
+  }
+
+  toggleForm() {
+    this.registerForm = !this.registerForm;
+  }
+
+  selectAvatar(color: string) {
+    this.formData.avatar = color;
+    console.log(this.formData)
   }
 
   submitForm() {
@@ -60,13 +72,23 @@ export class LoginComponent implements OnInit {
             name: this.formData.name,
             password: this.formData.password,
             bio: '',
-            role: 0
+            role: 0,
+            avatar: this.formData.avatar
           })
         })
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
+            this.formData = {
+              name: '',
+              email: '',
+              password: '',
+              bio: '',
+              role: 0,
+              avatar: 'darkgrey'
+            };
+            this.router.navigate(['/login']).then(r => console.log(r));
             return response;
           })
           .then(data => console.log(data))

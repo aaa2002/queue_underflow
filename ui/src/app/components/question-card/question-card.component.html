@@ -1,12 +1,14 @@
 <div class="question-card-wrapper">
   <mat-card class="question-card">
     <mat-card-title>
-      <span>Title: {{questionObject.title}}</span>
+      <button class="question-title" (click)="goToQuestion()"><span class="title-text">{{questionObject.title}}</span></button>
     </mat-card-title>
     <mat-card-content>
-      <span>User: {{ questionObject.user.name }}</span>
+      <div class="d-flex grey-text">
+        <span>Author: {{ questionObject.user.name }}</span>
+        <span class="ml-2">Posted on: {{formattedDate(questionObject.createdAt)}}</span>
+      </div>
       <span>User Score: {{ questionObject.user.score }}</span>
-      <span>Date: {{questionObject.createdAt}}</span>
       <span>Text: {{questionObject.text}}</span>
     </mat-card-content>
     <mat-card-actions>

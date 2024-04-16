@@ -1,7 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main-wrapper {
+  height: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+@for $i from 1 through 4 {
+  .mr-#{$i} {
+    margin-right: #{$i}rem;
+  }
+  .ml-#{$i} {
+    margin-left: #{$i}rem;
+  }
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+  .mx-#{$i} {
+    margin-left: #{$i}rem;
+    margin-right: #{$i}rem;
+  }
+  .my-#{$i} {
+    margin-top: #{$i}rem;
+    margin-bottom: #{$i}rem;
+  }
+}
+
+.grey-text {
+  color: #757575;
+}
+
 
 .login-card {
   .mat-mdc-card-content {
@@ -11,6 +70,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-.main-wrapper {
-  height: 100%;
+.profile-pic-menu {
+  .mat-mdc-menu-content {
+    padding: 8px;
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

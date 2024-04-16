@@ -5,12 +5,18 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    border: 1px solid black;
     margin: 0 auto;
     display: block;
-    background-color: skyblue;
+    background-color: #DDD;
     display: flex;
     justify-content: center;
     align-items: center;
+    &-icon {
+      width: 70px;
+      height: 70px;
+      font-size: 70px;
+    }
   }
 
   &__info {

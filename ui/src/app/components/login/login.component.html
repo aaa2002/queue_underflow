@@ -20,7 +20,51 @@
           <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
+        <button class="mb-2" type="button" mat-button [matMenuTriggerFor]="menu" *ngIf="registerForm">
+          <div class="d-flex align-center">
+          <div class="mr-1" [style.display]="formData.avatar ? 'flex' : 'none'"
+               style="height: 10px; width: 10px; border: 1px solid black; border-radius: 4px; background: {{ formData.avatar }}"></div>
+          Select Profile Picture
+          </div>
+        </button>
+        <mat-menu #menu="matMenu" class="profile-pic-menu">
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('red')">
+            <mat-icon class="profile-icon" style="margin: 0; color: red">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('skyblue')">
+            <mat-icon class="profile-icon" style="margin: 0; color: skyblue">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('lawngreen')">
+            <mat-icon class="profile-icon" style="margin: 0; color: lawngreen">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('yellow')">
+            <mat-icon class="profile-icon" style="margin: 0; color: yellow">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('pink')">
+            <mat-icon class="profile-icon" style="margin: 0; color: pink">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('rebeccapurple')">
+            <mat-icon class="profile-icon" style="margin: 0; color: rebeccapurple">person</mat-icon>
+          </button>
+          <button mat-menu-item style="width: 40px; height: 40px; padding: 0px 8px"
+                  class="d-flex justify-center align-center" (click)="selectAvatar('orange')">
+            <mat-icon class="profile-icon" style="margin: 0; color: orange">person</mat-icon>
+          </button>
+        </mat-menu>
+
         <button mat-flat-button type="submit" color="accent">Submit</button>
+
+        <div class="d-flex flex-column align-center">
+          <span class="my-1">{{registerForm ? 'Already have an account ?' : 'Don\'t have an account?'}}</span>
+          <button mat-flat-button type="button" color="primary"
+                  (click)="toggleForm()">{{registerForm ? 'Login' : 'Register'}}</button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>

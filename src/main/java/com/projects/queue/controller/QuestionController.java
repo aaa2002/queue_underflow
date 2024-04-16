@@ -44,4 +44,9 @@ public class QuestionController {
     public List<Question> getAllQuestions() {
         return questionService.getAllQuestions();
     }
+
+    @GetMapping("/{questionId}")
+    public Question getQuestionById(@PathVariable Long questionId) {
+        return questionService.getQuestionById(questionId);
+    }
 }

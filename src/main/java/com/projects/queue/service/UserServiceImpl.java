@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
         user.setScore(0);
         user.setAccountStatus(AccountStatus.ACTIVE);
         user.setBio("Hello! I'm a user");
+        user.setAvatar(createUserDTO.getAvatar());
 
         userRepository.save(user);
 

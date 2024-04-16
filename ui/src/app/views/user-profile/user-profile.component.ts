@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })

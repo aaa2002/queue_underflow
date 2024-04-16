@@ -1,7 +1,7 @@
 <mat-card class="profile-card">
   <mat-card-content>
     <div class="profile-card__avatar">
-      <img src="{{ activeUser.avatar }}" alt="avatar">
+      <mat-icon class="profile-card__avatar-icon" [style.color]="activeUser.avatar">person</mat-icon>
     </div>
     <div class="profile-card__info">
       <h2>{{ activeUser.name }}</h2>

@@ -10,6 +10,7 @@ import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../service/notificationService";
 
 interface registerFormData {
   name: string;
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
     avatar: 'darkgrey'
   };
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -79,7 +80,9 @@ export class LoginComponent implements OnInit {
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
+              this.notificationService.show('Registration failed');
             }
+            this.notificationService.show('Registration successful');
             this.formData = {
               name: '',
               email: '',

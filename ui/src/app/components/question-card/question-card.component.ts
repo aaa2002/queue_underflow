@@ -37,5 +37,13 @@ export class QuestionCardComponent {
     this.router.navigate(['/main/question', this.questionObject.id]);
   }
 
+  incrementScore = () => {
+    this.questionObject.score++;
+  }
+
+  decrementScore = () => {
+    this.questionObject.score--;
+  }
+
   protected readonly console = console;
 }

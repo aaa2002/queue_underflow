@@ -13,7 +13,7 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="button-square-container">
-        <button mat-mini-fab color="primary" aria-label="Upvote">
+        <button mat-mini-fab color="primary" aria-label="Upvote" (click) = "incrementScore()">
           <mat-icon>plus_one</mat-icon>
         </button>
       </div>
@@ -21,7 +21,7 @@
         {{questionObject.score}}
       </mat-chip>
       <div class="button-square-container">
-        <button mat-mini-fab color="warn" aria-label="Downvote">
+        <button mat-mini-fab color="warn" aria-label="Downvote" (click)="decrementScore()">
           <mat-icon>exposure_neg_1</mat-icon>
         </button>
       </div>

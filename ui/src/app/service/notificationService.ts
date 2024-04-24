@@ -10,6 +10,7 @@ export class NotificationService {
   show(message: string, action: string = 'Close', duration: number = 3000) {
     this.snackBar.open(message, action, {
       duration: duration,
+      panelClass: ['notification-snackbar']
     });
   }
 }

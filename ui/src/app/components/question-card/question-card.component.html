@@ -11,18 +11,25 @@
       <span>User Score: {{ questionObject.user.score }}</span>
       <span>Text: {{questionObject.text}}</span>
     </mat-card-content>
-    <mat-card-actions>
-      <div class="button-square-container">
-        <button mat-mini-fab color="primary" aria-label="Upvote" (click) = "incrementScore()">
-          <mat-icon>plus_one</mat-icon>
-        </button>
+    <mat-card-actions class="d-flex align-center justify-between">
+      <div class="vote-buttons-section d-flex align-center">
+        <div class="button-square-container">
+          <button mat-mini-fab color="primary" aria-label="Upvote" (click) = "incrementScore()">
+            <mat-icon>plus_one</mat-icon>
+          </button>
+        </div>
+        <mat-chip color="accent" class="question-score">
+          {{questionObject.score}}
+        </mat-chip>
+        <div class="button-square-container">
+          <button mat-mini-fab color="warn" aria-label="Downvote" (click)="decrementScore()">
+            <mat-icon>exposure_neg_1</mat-icon>
+          </button>
+        </div>
       </div>
-      <mat-chip color="accent" class="question-score">
-        {{questionObject.score}}
-      </mat-chip>
-      <div class="button-square-container">
-        <button mat-mini-fab color="warn" aria-label="Downvote" (click)="decrementScore()">
-          <mat-icon>exposure_neg_1</mat-icon>
+      <div class="other-actions">
+        <button *ngIf="createdByCrtUser()" mat-button color="warn" aria-label="DeleteQ" class="action-button--delete" (click)="deleteQuestion()">
+          <span>Delete Question</span>
         </button>
       </div>
     </mat-card-actions>

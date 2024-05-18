@@ -12,6 +12,28 @@
           <p>{{ answer.text }}</p>
           <mat-card-subtitle>Answered by {{ answer.user.name }}</mat-card-subtitle>
         </mat-card-content>
+        <mat-card-actions class="d-flex align-center justify-between">
+          <div class="vote-buttons-section d-flex align-center">
+            <div class="button-square-container">
+              <button mat-mini-fab color="primary" aria-label="Upvote" (click) = "incrementScore()">
+                <mat-icon>plus_one</mat-icon>
+              </button>
+            </div>
+            <mat-chip color="accent" class="question-score">
+              {{questionData.score}}
+            </mat-chip>
+            <div class="button-square-container">
+              <button mat-mini-fab color="warn" aria-label="Downvote" (click)="decrementScore()">
+                <mat-icon>exposure_neg_1</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="other-actions">
+            <button *ngIf="createdByCrtUser(answer)" mat-button color="warn" aria-label="DeleteQ" class="action-button--delete" (click)="deleteAnswer(answer.id)">
+              <span>Delete Answer</span>
+            </button>
+          </div>
+        </mat-card-actions>
       </mat-card>
     </div>
   </mat-card-content>

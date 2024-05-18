@@ -8,6 +8,7 @@ import com.projects.queue.service.AnswerService;
 import com.projects.queue.service.QuestionService;
 import com.projects.queue.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class AnswerController {
         answerService.updateAnswer(updateAnswerDTO);
     }
 
+    @Transactional
     @PostMapping("/delete/{id}")
     public void deleteAnswer(@PathVariable Long id) {
         answerService.deleteAnswer(id);

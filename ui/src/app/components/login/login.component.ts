@@ -78,11 +78,16 @@ export class LoginComponent implements OnInit {
           })
         })
           .then(response => {
-            if (!response.ok) {
+            console.log(response.status)
+            if (response.status !== 200 && response.status !== 201 && response.status !== 400) {
               throw new Error('Network response was not ok');
               this.notificationService.show('Registration failed');
+            } else if (response.status === 400) {
+              this.notificationService.show('Email already in use');
+              throw new Error('Email already in use');
+            } else {
+              this.notificationService.show('Registration successful');
             }
-            this.notificationService.show('Registration successful');
             this.formData = {
               name: '',
               email: '',

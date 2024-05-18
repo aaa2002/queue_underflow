@@ -13,45 +13,6 @@ import {NgForOf} from "@angular/common";
   styleUrl: './questions.component.scss'
 })
 export class QuestionsComponent {
-  mockQuestions = [
-    {
-      "id": 1,
-      "user": {
-        "id": 1,
-        "name": "Test user 1",
-        "email": "dsdsadsadd",
-        "password": "$2a$10$eO74b2tPFuNeApDDWnls0uzOAMC8glzq.J.NOAPfCb4tx1JFMz0g6",
-        "bio": "Hello! I'm a user",
-        "score": 0,
-        "role": "USER",
-        "accountStatus": "ACTIVE"
-      },
-      "title": "Q1 Test",
-      "text": "Uh, this is my first question, hope it's good.",
-      "createdAt": "2024-04-04T11:11:11.792557Z",
-      "image": null,
-      "score": 0
-    },
-    {
-      "id": 1,
-      "user": {
-        "id": 1,
-        "name": "Test user 1",
-        "email": "dsdsadsadd",
-        "password": "$2a$10$eO74b2tPFuNeApDDWnls0uzOAMC8glzq.J.NOAPfCb4tx1JFMz0g6",
-        "bio": "Hello! I'm a user",
-        "score": 0,
-        "role": "USER",
-        "accountStatus": "ACTIVE"
-      },
-      "title": "Q1 Test",
-      "text": "Uh, this is my first question, hope it's good.",
-      "createdAt": "2024-04-04T11:11:11.792557Z",
-      "image": null,
-      "score": 0
-    }
-  ];
-
   questions: any;
 
   constructor() {
@@ -72,6 +33,7 @@ export class QuestionsComponent {
       .then(data => {
         console.log(data);
         this.questions = data;
+        this.questions = this.questions.sort((a: any, b: any) => b.score - a.score);
         return data;
       })
       .catch(error => {

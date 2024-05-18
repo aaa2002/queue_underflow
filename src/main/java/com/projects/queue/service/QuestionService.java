@@ -17,4 +17,8 @@ public interface QuestionService {
     Question getQuestionById(Long id);
 
     List<Question> getAllQuestions();
+
+    int likeQuestion(Long questionId, User user);
+
+    int dislikeQuestion(Long questionId, User user);
 }

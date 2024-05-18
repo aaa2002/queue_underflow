@@ -4,6 +4,8 @@ import com.projects.queue.DTOs.user.CreateUserDTO;
 import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.AccountStatus;
 import com.projects.queue.model.User;
+import com.projects.queue.repository.AnswerRepository;
+import com.projects.queue.repository.QuestionRepository;
 import com.projects.queue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
+
     @Override
     public CreateUserDTO createUser(CreateUserDTO createUserDTO) {
         User user = new User();
@@ -28,6 +36,10 @@ public class UserServiceImpl implements UserService {
         user.setAccountStatus(AccountStatus.ACTIVE);
         user.setBio("Hello! I'm a user");
         user.setAvatar(createUserDTO.getAvatar());
+
+        if(userRepository.findByEmail(createUserDTO.getEmail()) != null) {
+            return null;
+        }
 
         userRepository.save(user);
 
@@ -41,6 +53,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteUserById(Long id) {
+        answerRepository.deleteAllByUserId(id);
+        questionRepository.deleteAllByUserId(id);
         userRepository.deleteById(id);
         System.out.println("User with id " + id + " deleted");
     }

@@ -4,12 +4,14 @@ import {MatCardModule} from '@angular/material/card';
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {MatChip} from "@angular/material/chips";
 
 
 @Component({
   selector: 'app-question-view',
   standalone: true,
-  imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf],
+    imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf, MatButton, MatChip, MatMiniFabButton],
   templateUrl: './question-view.component.html',
   styleUrl: './question-view.component.scss'
 })
@@ -18,6 +20,7 @@ export class QuestionViewComponent implements OnInit{
   questionData: any = {};
   authorData: any = {};
   answers: any[] = [];
+
 
   constructor(private route: ActivatedRoute) {}
 
@@ -78,5 +81,32 @@ export class QuestionViewComponent implements OnInit{
       .catch(error => {
         console.error('Error fetching answers:', error);
       });
+  }
+
+  incrementScore = () => {
+    this.questionData.score++;
+  }
+
+  decrementScore = () => {
+    this.questionData.score--;
+  }
+
+  createdByCrtUser = (answer: any) => {
+    return answer.user.email === localStorage.getItem('activeUser');
+  }
+
+  deleteAnswer = (answerId: any) => {
+    fetch(`http://localhost:8080/answers/delete/${answerId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then((response) => {
+      if (response.ok) {
+        //this.refresh.emit();
+      } else {
+        console.log('Error deleting question');
+      }
+    });
   }
 }

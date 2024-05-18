@@ -39,6 +39,15 @@ public class AppInitializer {
             createUserDTO.setRole(Role.MODERATOR);
             createUserDTO.setAvatar("red");
             userService.createUser(createUserDTO);
+
+            createUserDTO = new CreateUserDTO();
+            createUserDTO.setEmail("bbb");
+            createUserDTO.setPassword("bbb");
+            createUserDTO.setName("bbb");
+            createUserDTO.setRole(Role.MODERATOR);
+            createUserDTO.setAvatar("blue");
+            userService.createUser(createUserDTO);
+
         }
 
         QuestionDTO questionDTO = new QuestionDTO("What is the capital of France?", "Hello! I was wondering what the capital of France is. Can someone help me?");
@@ -46,7 +55,7 @@ public class AppInitializer {
         questionDTO = new QuestionDTO("What is the capital of England?", "Hello! I was wondering what the capital of England is. Can someone help me?");
         questionService.createQuestion(questionDTO, userService.getUserByEmail("aaa"));
         questionDTO = new QuestionDTO("What is the capital of Romania?", "Hello! I was wondering what the capital of Romania is. Can someone help me?");
-        questionService.createQuestion(questionDTO, userService.getUserByEmail("aaa"));
+        questionService.createQuestion(questionDTO, userService.getUserByEmail("bbb"));
 
         AnswerDTO answerDTO = new AnswerDTO("The capital of France is Paris.");
         answerService.createAnswer(answerDTO, 1L, 1L);
@@ -57,5 +66,8 @@ public class AppInitializer {
         answerDTO = new AnswerDTO("Oh, man, you're all wrong! The capital of France is Spain.");
         answerService.createAnswer(answerDTO, 1L, 1L);
 
+
+        answerDTO = new AnswerDTO("The capital of England is London.");
+        answerService.createAnswer(answerDTO, 2L, 2L);
     }
 }

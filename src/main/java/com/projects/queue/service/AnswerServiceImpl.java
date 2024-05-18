@@ -38,8 +38,19 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     public void deleteAnswer(Long id) {
-        answerRepository.deleteById(id);
+        try {
+            Answer answer = answerRepository.findById(id).orElseThrow(() -> new RuntimeException("Answer not found"));
+
+            answer.getLikers().clear();
+            answer.getDislikers().clear();
+
+            answerRepository.save(answer);
+            answerRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting answer", e);
+        }
     }
+
 
     public void updateAnswer(UpdateAnswerDTO updateAnswerDTO) {
         Answer answer = getAnswerById(updateAnswerDTO.getId());

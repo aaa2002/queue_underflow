@@ -40,9 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.getDislikers().clear();
 
         questionRepository.save(question);
-
         answerRepository.deleteByQuestionId(id);
-
         questionRepository.deleteById(id);
 
         System.out.println("Question with id " + id + " deleted");

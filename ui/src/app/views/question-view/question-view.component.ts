@@ -138,7 +138,7 @@ export class QuestionViewComponent implements OnInit {
       }
     }).then((response) => {
       if (response.ok) {
-        //this.refresh.emit();
+        this.fetchAnswers();
       } else {
         console.log('Error deleting question');
       }

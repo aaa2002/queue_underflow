@@ -51,12 +51,12 @@ export class QuestionCardComponent {
     if (response.ok) {
       const text = await response.text();
       console.log(text);
-      this.notificationService.show('Question liked', 'ok');
+      this.notificationService.show('Question liked', '🥳');
       this.refresh.emit();
     } else if (response.status === 409) {
       const text = await response.text();
       console.log(text);
-      this.notificationService.show(text, 'error');
+      this.notificationService.show(text, '🥶');
     } else {
       console.log('Error liking question');
     }
@@ -71,12 +71,12 @@ export class QuestionCardComponent {
       }
     }).then(async (response) => {
       if (response.ok) {
-        this.notificationService.show('Question disliked', 'ok');
+        this.notificationService.show('Question disliked', '🥳');
         this.refresh.emit();
       } else if (response.status === 409) {
         const text = await response.text();
         console.log(text);
-        this.notificationService.show(text, 'error');
+        this.notificationService.show(text, '🥶');
       } else {
         console.log('Error disliking question');
       }

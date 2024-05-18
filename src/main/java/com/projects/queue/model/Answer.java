@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,9 +26,21 @@ public class Answer {
     //  TODO: image
     private Instant createdAt;
     private Integer score;
-    //  TODO: likers
-    //  TODO: dislikers
+    @ManyToMany
+    @JoinTable(
+            name = "answer_likers",
+            joinColumns = @JoinColumn(name = "answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> likers;
 
+    @ManyToMany
+    @JoinTable(
+            name = "answer_dislikers",
+            joinColumns = @JoinColumn(name = "answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> dislikers;
     public void setId(Long id) {
         this.id = id;
     }

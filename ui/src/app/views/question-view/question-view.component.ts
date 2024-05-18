@@ -6,23 +6,25 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatChip} from "@angular/material/chips";
+import {NotificationService} from "../../service/notificationService";
 
 
 @Component({
   selector: 'app-question-view',
   standalone: true,
-    imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf, MatButton, MatChip, MatMiniFabButton],
+  imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf, MatButton, MatChip, MatMiniFabButton],
   templateUrl: './question-view.component.html',
   styleUrl: './question-view.component.scss'
 })
-export class QuestionViewComponent implements OnInit{
-  questionId: string ='';
+export class QuestionViewComponent implements OnInit {
+  questionId: string = '';
   questionData: any = {};
   authorData: any = {};
   answers: any[] = [];
 
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private notificationService: NotificationService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -77,18 +79,51 @@ export class QuestionViewComponent implements OnInit{
       })
       .then(data => {
         this.answers = data;
+        this.answers = this.answers.sort((a, b) => b.score - a.score);
       })
       .catch(error => {
         console.error('Error fetching answers:', error);
       });
   }
 
-  incrementScore = () => {
-    this.questionData.score++;
+  incrementScore = (answerId: any) => {
+    fetch(`http://localhost:8080/answers/like/${answerId}/${localStorage.getItem('activeUser')}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(async (response) => {
+      if (response.ok) {
+        this.notificationService.show('Answer disliked', '🥳');
+        this.fetchAnswers();
+      } else if (response.status === 409) {
+        const text = await response.text();
+        console.log(text);
+        this.notificationService.show(text, '🥶');
+      } else {
+        console.log('Error disliking answer');
+      }
+    });
   }
 
-  decrementScore = () => {
-    this.questionData.score--;
+  decrementScore = (answerId: any) => {
+    fetch(`http://localhost:8080/answers/dislike/${answerId}/${localStorage.getItem('activeUser')}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(async (response) => {
+      if (response.ok) {
+        this.notificationService.show('Answer disliked', '🥳');
+        this.fetchAnswers();
+      } else if (response.status === 409) {
+        const text = await response.text();
+        console.log(text);
+        this.notificationService.show(text, '🥶');
+      } else {
+        console.log('Error disliking answer');
+      }
+    });
   }
 
   createdByCrtUser = (answer: any) => {

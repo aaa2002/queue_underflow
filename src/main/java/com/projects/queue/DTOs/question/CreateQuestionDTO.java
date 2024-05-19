@@ -2,7 +2,7 @@ package com.projects.queue.DTOs.question;
 
 public class CreateQuestionDTO {
     public QuestionDTO questionDTO;
-    public Long userId;
+    public String userEmail;
 
     public QuestionDTO getQuestionDTO() {
         return questionDTO;
@@ -12,11 +12,11 @@ public class CreateQuestionDTO {
         this.questionDTO = questionDTO;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

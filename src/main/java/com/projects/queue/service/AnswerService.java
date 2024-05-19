@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AnswerService {
 
-    public void createAnswer(AnswerDTO answerDTO, Long questionId, Long userId);
+    public void createAnswer(AnswerDTO answerDTO, Long questionId, String userEmail);
 
     public void updateAnswer(UpdateAnswerDTO updateAnswerDTO);
 

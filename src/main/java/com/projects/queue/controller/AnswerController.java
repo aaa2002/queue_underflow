@@ -32,7 +32,7 @@ public class AnswerController {
 
     @PostMapping("/create")
     public void createAnswer(@RequestBody CreateAnswerDTO createAnswerDTO) {
-        answerService.createAnswer(createAnswerDTO.getAnswerDTO(), createAnswerDTO.getQuestionId(), createAnswerDTO.getUserId());
+        answerService.createAnswer(createAnswerDTO.getAnswerDTO(), createAnswerDTO.getQuestionId(), createAnswerDTO.getUserEmail());
     }
 
     @PostMapping("/update")

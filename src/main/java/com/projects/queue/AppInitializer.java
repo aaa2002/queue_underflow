@@ -58,16 +58,16 @@ public class AppInitializer {
         questionService.createQuestion(questionDTO, userService.getUserByEmail("bbb"));
 
         AnswerDTO answerDTO = new AnswerDTO("The capital of France is Paris.");
-        answerService.createAnswer(answerDTO, 1L, 1L);
+        answerService.createAnswer(answerDTO, 1L, "aaa");
         answerDTO = new AnswerDTO("I'd say that the capital of France is London!");
-        answerService.createAnswer(answerDTO, 1L, 1L);
+        answerService.createAnswer(answerDTO, 1L, "aaa");
         answerDTO = new AnswerDTO("Me too ^^.");
-        answerService.createAnswer(answerDTO, 1L, 1L);
+        answerService.createAnswer(answerDTO, 1L, "aaa");
         answerDTO = new AnswerDTO("Oh, man, you're all wrong! The capital of France is Spain.");
-        answerService.createAnswer(answerDTO, 1L, 1L);
+        answerService.createAnswer(answerDTO, 1L, "aaa");
 
 
         answerDTO = new AnswerDTO("The capital of England is London.");
-        answerService.createAnswer(answerDTO, 2L, 2L);
+        answerService.createAnswer(answerDTO, 2L, "bbb");
     }
 }

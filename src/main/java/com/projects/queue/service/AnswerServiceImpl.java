@@ -23,11 +23,11 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private UserService userService;
 
-    public void createAnswer(AnswerDTO answerDTO, Long questionId, Long userId) {
+    public void createAnswer(AnswerDTO answerDTO, Long questionId, String userEmail) {
         Answer answer = new Answer();
         answer.setText(answerDTO.getText());
         answer.setQuestion(questionService.getQuestionById(questionId));
-        answer.setUser(userService.getUserById(userId));
+        answer.setUser(userService.getUserByEmail(userEmail));
         answer.setCreatedAt(Instant.now());
         answer.setScore(0);
         answerRepository.save(answer);

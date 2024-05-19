@@ -27,7 +27,7 @@ public class QuestionController {
 
     @PostMapping("/create")
     public void createQuestion(@RequestBody CreateQuestionDTO createQuestionDTO) {
-        User user = userService.getUserById(createQuestionDTO.getUserId());
+        User user = userService.getUserByEmail(createQuestionDTO.getUserEmail());
         questionService.createQuestion(createQuestionDTO.getQuestionDTO(), user);
     }
 

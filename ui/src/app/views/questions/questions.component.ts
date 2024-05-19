@@ -33,7 +33,9 @@ export class QuestionsComponent {
       .then(data => {
         console.log(data);
         this.questions = data;
-        this.questions = this.questions.sort((a: any, b: any) => b.score - a.score);
+        this.questions = this.questions.sort((a: any, b: any) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
         return data;
       })
       .catch(error => {

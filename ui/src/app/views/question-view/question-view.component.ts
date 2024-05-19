@@ -7,12 +7,17 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatChip} from "@angular/material/chips";
 import {NotificationService} from "../../service/notificationService";
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'app-question-view',
   standalone: true,
-  imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf, MatButton, MatChip, MatMiniFabButton],
+  imports: [MatCardModule, NgIf, MatIconModule, MatProgressSpinnerModule, NgForOf, MatButton, MatChip, MatMiniFabButton, MatFormField, MatInput, ReactiveFormsModule, MatButtonModule, FormsModule],
   templateUrl: './question-view.component.html',
   styleUrl: './question-view.component.scss'
 })
@@ -21,6 +26,13 @@ export class QuestionViewComponent implements OnInit {
   questionData: any = {};
   authorData: any = {};
   answers: any[] = [];
+  formData: any = {
+    answerDTO: {
+      text: ""
+    },
+    userEmail: "",
+    questionId: -1
+  }
 
 
   constructor(private route: ActivatedRoute, private notificationService: NotificationService) {
@@ -94,7 +106,7 @@ export class QuestionViewComponent implements OnInit {
       }
     }).then(async (response) => {
       if (response.ok) {
-        this.notificationService.show('Answer disliked', '🥳');
+        this.notificationService.show('Answer liked', '🥳');
         this.fetchAnswers();
       } else if (response.status === 409) {
         const text = await response.text();
@@ -141,6 +153,34 @@ export class QuestionViewComponent implements OnInit {
         this.fetchAnswers();
       } else {
         console.log('Error deleting question');
+      }
+    });
+  }
+
+  getActiveUser() {
+    if (localStorage.getItem('activeUser') == null) {
+      this.notificationService.show("Please login to ask a question", "OK");
+    } else {
+      this.formData.userEmail = localStorage.getItem('activeUser') ?? "";
+    }
+  }
+
+  addAnswer = (/*answerText: string*/) => {
+    this.getActiveUser();
+    this.formData.questionId = this.questionId;
+    fetch('http://localhost:8080/answers/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.formData)
+    }).then(response => {
+      if (response.status == 200) {
+        this.notificationService.show("Answer added successfully", "OK");
+        this.formData.answerDTO.text = "";
+        this.fetchAnswers();
+      } else {
+        this.notificationService.show("Failed to add answer", "OK");
       }
     });
   }

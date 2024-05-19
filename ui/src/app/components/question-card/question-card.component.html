@@ -14,21 +14,21 @@
     <mat-card-actions class="d-flex align-center justify-between">
       <div class="vote-buttons-section d-flex align-center">
         <div class="button-square-container">
-          <button mat-mini-fab color="primary" aria-label="Upvote" (click) = "incrementScore()">
+          <button mat-mini-fab class="upvote" aria-label="Upvote" (click) = "incrementScore()">
             <mat-icon>plus_one</mat-icon>
           </button>
         </div>
-        <mat-chip color="accent" class="question-score">
-          {{questionObject.score}}
-        </mat-chip>
+        <span class="question-score">
+          Score: {{questionObject.score}}
+        </span>
         <div class="button-square-container">
-          <button mat-mini-fab color="warn" aria-label="Downvote" (click)="decrementScore()">
+          <button mat-mini-fab class="downvote" aria-label="Downvote" (click)="decrementScore()">
             <mat-icon>exposure_neg_1</mat-icon>
           </button>
         </div>
       </div>
       <div class="other-actions">
-        <button *ngIf="createdByCrtUser()" mat-button color="warn" aria-label="DeleteQ" class="action-button--delete" (click)="deleteQuestion()">
+        <button *ngIf="createdByCrtUser()" mat-button aria-label="DeleteQ" class="action-button--delete" (click)="deleteQuestion()">
           <span>Delete Question</span>
         </button>
       </div>

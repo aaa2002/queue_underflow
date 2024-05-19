@@ -2,15 +2,15 @@ package com.projects.queue.DTOs.answer;
 
 public class CreateAnswerDTO {
     AnswerDTO answerDTO;
-    Long userId;
+    String userEmail;
     Long questionId;
 
     public CreateAnswerDTO() {
     }
 
-    public CreateAnswerDTO(AnswerDTO answerDTO, Long userId, Long questionId) {
+    public CreateAnswerDTO(AnswerDTO answerDTO, String userEmail, Long questionId) {
         this.answerDTO = answerDTO;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.questionId = questionId;
     }
 
@@ -22,12 +22,12 @@ public class CreateAnswerDTO {
         this.answerDTO = answerDTO;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public Long getQuestionId() {

@@ -1,12 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MatCard, MatCardActions, MatCardContent, MatCardTitle } from "@angular/material/card";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatButtonModule } from "@angular/material/button";
-import { MatChip } from "@angular/material/chips";
-import { Router } from "@angular/router";
-import { format } from 'date-fns';
-import { NgIf } from "@angular/common";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatButtonModule} from "@angular/material/button";
+import {MatChip} from "@angular/material/chips";
+import {Router} from "@angular/router";
+import {format} from 'date-fns';
+import {NgIf} from "@angular/common";
 import {NotificationService} from "../../service/notificationService";
 
 @Component({
@@ -34,7 +34,8 @@ export class QuestionCardComponent {
 
   formattedDate = (date: any) => format(date, 'MM/dd/yyyy');
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   goToQuestion = () => {
     this.router.navigate(['/main/question', this.questionObject.id]);

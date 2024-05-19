@@ -5,6 +5,7 @@ import {MainWrapperComponent} from "./views/main-wrapper/main-wrapper.component"
 import {UserProfileComponent} from "./views/user-profile/user-profile.component";
 import {QuestionViewComponent} from "./views/question-view/question-view.component";
 import {AddQuestionViewComponent} from "./views/add-question-view/add-question-view.component";
+import {AllUsersComponent} from "./views/all-users/all-users.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -16,7 +17,8 @@ export const routes: Routes = [
       {path: 'profile', component: UserProfileComponent, pathMatch: 'full'},
       {path: '', redirectTo: 'questions', pathMatch: 'full'},
       {path: 'question/:question_id', component: QuestionViewComponent, pathMatch: 'full'},
-      {path: 'question-add', component: AddQuestionViewComponent, pathMatch: 'full'}
+      {path: 'question-add', component: AddQuestionViewComponent, pathMatch: 'full'},
+      {path: 'allUsers', component: AllUsersComponent, pathMatch: 'full'}
     ]
   },
 ];

@@ -54,7 +54,11 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUserById(Long id) {
         answerRepository.deleteAllByUserId(id);
+        answerRepository.deleteAllLikesByUserId(id);
+        answerRepository.deleteAllDislikesByUserId(id);
         questionRepository.deleteAllByUserId(id);
+        questionRepository.deleteAllLikesByUserId(id);
+        questionRepository.deleteAllDislikesByUserId(id);
         userRepository.deleteById(id);
         System.out.println("User with id " + id + " deleted");
     }

@@ -1,0 +1,18 @@
+<div class="wrapper mx-2 my-2">
+  <h1 class="mb-2">Users List</h1>
+  <mat-card *ngFor="let user of usersList" class="mb-2">
+    <mat-card-content>
+      <div class="d-flex justify-between">
+        <div>
+          <h3>User Name: {{ user.name }}</h3>
+          <p>User Email: {{ user.email }}</p>
+        </div>
+        <div class="button-square-container d-flex flex-column justify-between">
+          <button mat-raised-button *ngIf="!isCurrentUser(user)" class="downvote" (click)="banUser(user)">Ban</button>
+          <button mat-raised-button *ngIf="!isCurrentUser(user)" class="upvote" (click)="unbanUser(user)">Unban</button>
+          <button mat-raised-button *ngIf="!isCurrentUser(user)" class="downvote" (click)="deleteUser(user)">Delete</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

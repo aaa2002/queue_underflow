@@ -21,6 +21,7 @@
     <mat-drawer #drawer class="drawer">
       <button mat-menu-item [routerLink]="'/main/questions'"><mat-icon>home</mat-icon>Home</button>
       <button mat-menu-item [routerLink]="'/main/question-add'"><mat-icon>question_mark</mat-icon>Ask a Question</button>
+      <button mat-menu-item [routerLink]="'/main/allUsers'" *ngIf="activeUserIsModerator()"><mat-icon>person_search</mat-icon>All Users</button>
     </mat-drawer>
     <div class="content">
       <router-outlet></router-outlet>

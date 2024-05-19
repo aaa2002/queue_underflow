@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.route.data.subscribe(data => {
       this.registerForm = data['registerForm'] || false;
     });

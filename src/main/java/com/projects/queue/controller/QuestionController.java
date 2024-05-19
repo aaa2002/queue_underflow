@@ -2,6 +2,7 @@ package com.projects.queue.controller;
 
 import com.projects.queue.DTOs.question.CreateQuestionDTO;
 import com.projects.queue.DTOs.question.UpdateQuestionDTO;
+import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.Question;
 import com.projects.queue.model.User;
 import com.projects.queue.service.QuestionService;
@@ -59,6 +60,10 @@ public class QuestionController {
 
         switch (result) {
             case 0:
+                User questionAuthor = questionService.getQuestionById(questionId).getUser();
+                questionAuthor.setScore(questionAuthor.getScore() + 2.5);
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(questionAuthor.getId(), questionAuthor.getName(), questionAuthor.getEmail(), questionAuthor.getPassword(), questionAuthor.getBio(), questionAuthor.getScore(), questionAuthor.getRole(), questionAuthor.getAccountStatus());
+                userService.updateUser(updateUserDTO);
                 return ResponseEntity.ok("Question liked");
             case 1:
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Question already liked");
@@ -76,6 +81,10 @@ public class QuestionController {
 
         switch (result) {
             case 0:
+                User questionAuthor = questionService.getQuestionById(questionId).getUser();
+                questionAuthor.setScore(questionAuthor.getScore() - 1.5);
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(questionAuthor.getId(), questionAuthor.getName(), questionAuthor.getEmail(), questionAuthor.getPassword(), questionAuthor.getBio(), questionAuthor.getScore(), questionAuthor.getRole(), questionAuthor.getAccountStatus());
+                userService.updateUser(updateUserDTO);
                 return ResponseEntity.ok("Question disliked");
             case 1:
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Question already disliked");

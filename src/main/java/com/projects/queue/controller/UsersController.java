@@ -6,6 +6,7 @@ import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.User;
 import com.projects.queue.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class UsersController {
 
     @Autowired
@@ -23,62 +24,91 @@ public class UsersController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody CreateUserDTO createUserDTO) {
-        CreateUserDTO createdUser = userService.createUser(createUserDTO);
-        if (createdUser == null) {
-            return ResponseEntity.badRequest().build();
+        try {
+            CreateUserDTO createdUser = userService.createUser(createUserDTO);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("User registration failed: " + e.getMessage());
         }
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO user) {
         User loggedInUser = userService.getUserByEmail(user.getEmail());
         if (loggedInUser == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
-
-        String storedEncryptedPassword = loggedInUser.getPassword();
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        if (passwordEncoder.matches(user.getPassword(), storedEncryptedPassword)) {
-            return ResponseEntity.ok().build();
+        if (passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword())) {
+            return ResponseEntity.ok(loggedInUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
-
-        return ResponseEntity.status(401).build();
     }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
+        // Implement any necessary logout logic here
         return ResponseEntity.ok().build();
     }
 
     @Transactional
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        userService.deleteUserById(id);
-        return ResponseEntity.ok().build();
+        try {
+            userService.deleteUserById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user: " + e.getMessage());
+        }
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody UpdateUserDTO createUserDTO) {
-        userService.updateUser(createUserDTO);
-        return ResponseEntity.ok().build();
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+        try {
+            userService.updateUser(updateUserDTO);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user: " + e.getMessage());
+        }
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        try {
+            List<User> users = userService.getAllUsers();
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @GetMapping("/user/{email}")
-    public String getUserByEmail(@PathVariable String email) {
-        System.out.println(userService.getUserByEmail(email));
-        return userService.getUserByEmail(email).toString();
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @GetMapping("/{userId}")
-    public String getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId).toString();
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        try {
+            User user = userService.getUserById(userId);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

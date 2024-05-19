@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
           })
         })
           .then(response => {
-            console.log("here")
+            console.log(response)
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }

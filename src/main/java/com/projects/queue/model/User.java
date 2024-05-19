@@ -18,7 +18,7 @@ public class User {
     private String email;
     private String password;
     private String bio;
-    private Integer score;
+    private Double score;
     private String avatar;
     private Role role;
     private AccountStatus accountStatus;

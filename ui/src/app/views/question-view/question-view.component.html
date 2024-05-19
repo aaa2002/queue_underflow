@@ -20,7 +20,7 @@
       <mat-card *ngFor="let answer of answers" class="mb-1" style="background: #DDDDDD">
         <mat-card-content>
           <p>{{ answer.text }}</p>
-          <mat-card-subtitle>Answered by {{ answer.user.name }}</mat-card-subtitle>
+          <mat-card-subtitle>Answered by {{ answer.user.name }}, User Score: {{answer.user.score}}</mat-card-subtitle>
         </mat-card-content>
         <mat-card-actions class="d-flex align-center justify-between">
           <div class="vote-buttons-section d-flex align-center">

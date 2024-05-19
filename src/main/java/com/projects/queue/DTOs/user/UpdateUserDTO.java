@@ -9,14 +9,14 @@ public class UpdateUserDTO {
     private String email;
     private String password;
     private String bio;
-    private Integer score;
+    private Double score;
     private Role role;
     private AccountStatus accountStatus;
 
     public UpdateUserDTO() {
     }
 
-    public UpdateUserDTO(Long id, String name, String email, String password, String bio, Integer score, Role role, AccountStatus accountStatus) {
+    public UpdateUserDTO(Long id, String name, String email, String password, String bio, Double score, Role role, AccountStatus accountStatus) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -47,7 +47,7 @@ public class UpdateUserDTO {
         return bio;
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 

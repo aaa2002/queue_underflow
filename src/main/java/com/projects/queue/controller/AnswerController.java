@@ -3,6 +3,7 @@ package com.projects.queue.controller;
 import com.projects.queue.DTOs.answer.AnswerDTO;
 import com.projects.queue.DTOs.answer.CreateAnswerDTO;
 import com.projects.queue.DTOs.answer.UpdateAnswerDTO;
+import com.projects.queue.DTOs.user.UpdateUserDTO;
 import com.projects.queue.model.Answer;
 import com.projects.queue.model.User;
 import com.projects.queue.service.AnswerService;
@@ -58,6 +59,10 @@ public class AnswerController {
 
         switch (result) {
             case 0:
+                User answerAuthor = answerService.getAnswerById(answerId).getUser();
+                answerAuthor.setScore(answerAuthor.getScore() + 5.0);
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(answerAuthor.getId(), answerAuthor.getName(), answerAuthor.getEmail(), answerAuthor.getPassword(), answerAuthor.getBio(), answerAuthor.getScore(), answerAuthor.getRole(), answerAuthor.getAccountStatus());
+                userService.updateUser(updateUserDTO);
                 return ResponseEntity.ok("Answer liked");
             case 1:
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Answer already liked");
@@ -75,6 +80,14 @@ public class AnswerController {
 
         switch (result) {
             case 0:
+                User answerAuthor = answerService.getAnswerById(answerId).getUser();
+                answerAuthor.setScore(answerAuthor.getScore() - 2.5);
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(answerAuthor.getId(), answerAuthor.getName(), answerAuthor.getEmail(), answerAuthor.getPassword(), answerAuthor.getBio(), answerAuthor.getScore(), answerAuthor.getRole(), answerAuthor.getAccountStatus());
+                userService.updateUser(updateUserDTO);
+
+                user.setScore(user.getScore() - 1.5);
+                UpdateUserDTO updateUserDTO2 = new UpdateUserDTO(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getBio(), user.getScore(), user.getRole(), user.getAccountStatus());
+                userService.updateUser(updateUserDTO2);
                 return ResponseEntity.ok("Answer disliked");
             case 1:
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Answer already disliked");

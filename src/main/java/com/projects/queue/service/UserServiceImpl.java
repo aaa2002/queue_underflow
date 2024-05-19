@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(new BCryptPasswordEncoder().encode(createUserDTO.getPassword()));
         user.setName(createUserDTO.getName());
         user.setRole(createUserDTO.getRole());
-        user.setScore(0);
+        user.setScore(0.0);
         user.setAccountStatus(AccountStatus.ACTIVE);
         user.setBio("Hello! I'm a user");
         user.setAvatar(createUserDTO.getAvatar());
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UpdateUserDTO updateUserDTO) {
         User user = userRepository.findById(updateUserDTO.getId()).get();
         user.setEmail(updateUserDTO.getEmail());
-        user.setPassword(new BCryptPasswordEncoder().encode(updateUserDTO.getPassword()));
+        user.setPassword(updateUserDTO.getPassword());
         user.setName(updateUserDTO.getName());
         user.setRole(updateUserDTO.getRole());
         user.setScore(updateUserDTO.getScore());

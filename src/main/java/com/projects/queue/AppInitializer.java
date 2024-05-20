@@ -7,13 +7,18 @@ import com.projects.queue.DTOs.question.QuestionDTO;
 import com.projects.queue.DTOs.user.CreateUserDTO;
 import com.projects.queue.model.Question;
 import com.projects.queue.model.Role;
+import com.projects.queue.model.Tag;
 import com.projects.queue.model.User;
 import com.projects.queue.service.AnswerService;
 import com.projects.queue.service.QuestionService;
+import com.projects.queue.service.TagService;
 import com.projects.queue.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class AppInitializer {
@@ -26,6 +31,9 @@ public class AppInitializer {
 
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private TagService tagService;
 
     @PostConstruct
     public void initialize() {
@@ -50,8 +58,16 @@ public class AppInitializer {
 
         }
 
+
+
+        tagService.addTag("Geography");
+        tagService.addTag("Geology");
+        tagService.addTag("Biology");
+
         QuestionDTO questionDTO = new QuestionDTO("What is the capital of France?", "Hello! I was wondering what the capital of France is. Can someone help me?");
-        questionService.createQuestion(questionDTO, userService.getUserByEmail("aaa"));
+        List<Tag> tags = new ArrayList<>();
+        tags.add(tagService.findByName("Geography"));
+        questionService.createQuestion(questionDTO, userService.getUserByEmail("aaa"), tags);
         questionDTO = new QuestionDTO("What is the capital of England?", "Hello! I was wondering what the capital of England is. Can someone help me?");
         questionService.createQuestion(questionDTO, userService.getUserByEmail("aaa"));
         questionDTO = new QuestionDTO("What is the capital of Romania?", "Hello! I was wondering what the capital of Romania is. Can someone help me?");
@@ -69,5 +85,7 @@ public class AppInitializer {
 
         answerDTO = new AnswerDTO("The capital of England is London.");
         answerService.createAnswer(answerDTO, 2L, "bbb");
+
+
     }
 }

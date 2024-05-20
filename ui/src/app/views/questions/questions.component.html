@@ -1,4 +1,19 @@
 <div class="questions-wrapper">
+  <div class="filters d-flex  flex-row align-center justify-between">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput type="text" placeholder="Search by title..." (input)="filterQuestions($event)">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tag</mat-label>
+      <mat-select [(ngModel)]="selectedTag" (ngModelChange)="applyTag($event)">
+        <mat-option [value]="'all'">All</mat-option>
+        <mat-option *ngFor="let tag of tags" [value]="tag">{{tag.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
   <app-question-card *ngFor="let question of questions"
                      [questionObject]="question" (refresh)="fetchQuestions()"
   ></app-question-card>

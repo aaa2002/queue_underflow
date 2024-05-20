@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
@@ -29,4 +30,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     Optional<Question> findById(Long id);
 
     void deleteById(Long id);
+
+    @Query(value = "SELECT * FROM questions WHERE id IN (SELECT question_id FROM question_tags WHERE tag_id = :tag_id)", nativeQuery = true)
+    List<Question> findByTagId(Long tag_id);
 }

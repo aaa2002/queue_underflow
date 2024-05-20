@@ -94,4 +94,9 @@ public class QuestionController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error disliking question");
         }
     }
+
+    @GetMapping("/tag/{tagId}")
+    public List<Question> getQuestionsByTag(@PathVariable Long tagId) {
+        return questionService.getQuestionsByTag(tagId);
+    }
 }

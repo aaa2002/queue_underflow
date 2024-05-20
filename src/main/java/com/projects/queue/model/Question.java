@@ -34,6 +34,14 @@ public class Question {
 
     private Integer score;
 
+    @ManyToMany
+    @JoinTable(
+            name = "question_tags",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags;
+
     @OneToMany(mappedBy = "question")
     @JsonBackReference
     private List<Answer> answers;
@@ -133,6 +141,14 @@ public class Question {
 
     public void setDislikers(Set<User> dislikers) {
         this.dislikers = dislikers;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override

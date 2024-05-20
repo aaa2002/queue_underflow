@@ -3,6 +3,7 @@ package com.projects.queue.service;
 import com.projects.queue.DTOs.question.QuestionDTO;
 import com.projects.queue.DTOs.question.UpdateQuestionDTO;
 import com.projects.queue.model.Question;
+import com.projects.queue.model.Tag;
 import com.projects.queue.model.User;
 import com.projects.queue.repository.AnswerRepository;
 import com.projects.queue.repository.QuestionRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private AnswerRepository answerRepository;
 
-    public void createQuestion(QuestionDTO questionDTO, User user) {
+    public void createQuestion(QuestionDTO questionDTO, User user, List<Tag> tags) {
         Question question = new Question();
         question.setTitle(questionDTO.getTitle());
         question.setText(questionDTO.getText());
@@ -30,7 +32,13 @@ public class QuestionServiceImpl implements QuestionService {
         question.setUser(user);
         question.setScore(0);
 
+        question.setTags(tags);
+
         questionRepository.save(question);
+    }
+
+    public void createQuestion(QuestionDTO questionDTO, User user) {
+        createQuestion(questionDTO, user, new ArrayList<>());
     }
 
     public void deleteQuestionById(Long id) {
@@ -122,4 +130,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
+    public List<Question> getQuestionsByTag(Long tagId) {
+        return questionRepository.findByTagId(tagId);
+    }
 }

@@ -83,4 +83,16 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id).get();
     }
+
+    public void banUser(Long id) {
+        User user = userRepository.findById(id).get();
+        user.setAccountStatus(AccountStatus.BANNED);
+        userRepository.save(user);
+    }
+
+    public void unbanUser(Long id) {
+        User user = userRepository.findById(id).get();
+        user.setAccountStatus(AccountStatus.ACTIVE);
+        userRepository.save(user);
+    }
 }

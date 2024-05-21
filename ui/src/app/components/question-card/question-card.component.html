@@ -3,6 +3,9 @@
     <mat-card-title>
       <button class="question-title" (click)="goToQuestion()"><span class="title-text">{{questionObject.title}}</span></button>
     </mat-card-title>
+    <div class="d-flex flex-row mx-1 mb-1">
+      <mat-chip *ngFor="let tag of questionObject.tags" class="mr-1">{{tag.name}}</mat-chip>
+    </div>
     <mat-card-content>
       <div class="d-flex grey-text">
         <span>Author: {{ questionObject.user.name }}</span>
@@ -28,6 +31,9 @@
         </div>
       </div>
       <div class="other-actions">
+        <button *ngIf="createdByCrtUser()" mat-button aria-label="EditQ" class="action-button--edit mr-2" (click)="editQuestion()">
+          <span>Edit Question</span>
+        </button>
         <button *ngIf="createdByCrtUser()" mat-button aria-label="DeleteQ" class="action-button--delete" (click)="deleteQuestion()">
           <span>Delete Question</span>
         </button>

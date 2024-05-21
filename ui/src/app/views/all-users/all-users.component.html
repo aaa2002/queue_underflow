@@ -8,8 +8,8 @@
           <p>User Email: {{ user.email }}</p>
         </div>
         <div class="button-square-container d-flex flex-column justify-between">
-          <button mat-raised-button *ngIf="!isCurrentUser(user)" class="downvote" (click)="banUser(user)">Ban</button>
-          <button mat-raised-button *ngIf="!isCurrentUser(user)" class="upvote" (click)="unbanUser(user)">Unban</button>
+          <button mat-raised-button *ngIf="!isCurrentUser(user) && user.accountStatus === 'ACTIVE'" class="downvote" (click)="banUser(user)">Ban</button>
+          <button mat-raised-button *ngIf="!isCurrentUser(user) && user.accountStatus === 'BANNED'" class="upvote" (click)="unbanUser(user)">Unban</button>
           <button mat-raised-button *ngIf="!isCurrentUser(user)" class="downvote" (click)="deleteUser(user)">Delete</button>
         </div>
       </div>

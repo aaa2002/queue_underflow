@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edit Question</h1>
+<div mat-dialog-content class="mx-2">
+  <div class="d-flex flex-column align-center justify-center">
+    <mat-form-field appearance="outline" class="w-100 mx-2">
+      <input matInput placeholder="Title" [(ngModel)]="formData.question.title" [value]="formData.question.title">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100 mx-2">
+      <textarea matInput placeholder="Text" [(ngModel)]="formData.question.text" [value]="formData.question.text"></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-chip-list w-100" appearance="outline">
+      <mat-label>Tags</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter tags">
+        <mat-chip-row *ngFor="let tag of data.question.tags" (removed)="remove(tag)" [editable]="true"
+                      (edited)="edit(tag, $event)" [aria-description]="'press enter to edit ' + tag">
+          {{tag.name}}
+          <button matChipRemove [attr.aria-label]="'remove ' + tag" (click)="remove(tag)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="New tag..."
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               [formControl]="tagsCtrl"
+               (matChipInputTokenEnd)="add($event)">
+      </mat-chip-grid>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSubmit()">Save</button>
+</div>

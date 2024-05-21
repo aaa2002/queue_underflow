@@ -116,14 +116,18 @@ export class LoginComponent implements OnInit {
           })
         })
           .then(response => {
-            console.log(response)
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
+            console.log(response.status)
+            if (response.status === 403) {
+              this.notificationService.show('Account banned');
+              throw new Error('Account banned');
             }
             if (response.status === 200) {
               console.log('Login successful');
               localStorage.setItem('activeUser', this.formData.email);
               this.router.navigate(['/main/questions']).then(r => console.log(r));
+            }
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
             return response;
           })

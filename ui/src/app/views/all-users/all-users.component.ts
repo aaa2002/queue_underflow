@@ -42,9 +42,35 @@ export class AllUsersComponent implements OnInit {
   }
 
   banUser(user: any) {
+    fetch(`http://localhost:8080/users/ban/${user.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      }).then(() => {
+      this.fetchAllUsers();
+    });
   }
 
-  unbanUser(user: any) {}
+  unbanUser(user: any) {
+    fetch(`http://localhost:8080/users/unban/${user.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      }).then(() => {
+
+      this.fetchAllUsers();
+    });
+  }
 
   deleteUser(user: any) {
     fetch(`http://localhost:8080/users/delete/${user.id}`, {

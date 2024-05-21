@@ -17,4 +17,8 @@ public interface UserService {
 
     User getUserByEmail(String email);
     User getUserById(Long id);
+
+    void banUser(Long id);
+
+    void unbanUser(Long id);
 }

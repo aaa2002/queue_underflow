@@ -7,6 +7,7 @@ import com.projects.queue.model.Tag;
 import com.projects.queue.model.User;
 import com.projects.queue.repository.AnswerRepository;
 import com.projects.queue.repository.QuestionRepository;
+import com.projects.queue.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private AnswerRepository answerRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     public void createQuestion(QuestionDTO questionDTO, User user, List<Tag> tags) {
         Question question = new Question();
@@ -55,12 +59,27 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     public void updateQuestion(UpdateQuestionDTO updateQuestionDTO) {
-        Question question = questionRepository.findById(updateQuestionDTO.getId()).orElseThrow(() -> new RuntimeException("Question not found"));
+        Question question = questionRepository.findById(updateQuestionDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Question not found"));
+
         question.setTitle(updateQuestionDTO.getTitle());
         question.setText(updateQuestionDTO.getText());
 
+        List<Tag> tags = new ArrayList<>();
+        for (Tag tagDTO : updateQuestionDTO.getTags()) {
+            Tag tag = tagRepository.findByName(tagDTO.getName());
+            if (tag == null) {
+                tag = new Tag();
+                tag.setName(tagDTO.getName());
+                tag = tagRepository.save(tag);
+            }
+            tags.add(tag);
+        }
+
+        question.setTags(tags);
         questionRepository.save(question);
     }
+
 
     public Question getQuestionById(Long id) {
         return questionRepository.findById(id).orElseThrow(() -> new RuntimeException("Question not found"));

@@ -3,6 +3,7 @@ package com.projects.queue.controller;
 import com.projects.queue.DTOs.user.CreateUserDTO;
 import com.projects.queue.DTOs.user.LoginDTO;
 import com.projects.queue.DTOs.user.UpdateUserDTO;
+import com.projects.queue.model.AccountStatus;
 import com.projects.queue.model.User;
 import com.projects.queue.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,10 @@ public class UsersController {
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if (passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword())) {
+        if (passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword()) && loggedInUser.getAccountStatus().equals(AccountStatus.ACTIVE)) {
             return ResponseEntity.ok(loggedInUser);
+        } else if (loggedInUser.getAccountStatus().equals(AccountStatus.BANNED)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
@@ -109,6 +112,26 @@ public class UsersController {
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PostMapping("/ban/{userId}")
+    public ResponseEntity<?> banUser(@PathVariable Long userId) {
+        try {
+            userService.banUser(userId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error banning user: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/unban/{userId}")
+    public ResponseEntity<?> unbanUser(@PathVariable Long userId) {
+        try {
+            userService.unbanUser(userId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error unbanning user: " + e.getMessage());
         }
     }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, Inject, EventEmitter} from '@angular/core';
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
@@ -6,8 +6,10 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatChip} from "@angular/material/chips";
 import {Router} from "@angular/router";
 import {format} from 'date-fns';
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NotificationService} from "../../service/notificationService";
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {EditQuestionDialogComponent} from "../dialogs/edit-question-dialog/edit-question-dialog.component";
 
 @Component({
   selector: 'app-question-card',
@@ -17,7 +19,7 @@ import {NotificationService} from "../../service/notificationService";
     MatCard,
     MatCardTitle,
     MatIcon,
-    MatCardActions, MatButtonModule, MatDividerModule, MatIconModule, MatChip, NgIf
+    MatCardActions, MatButtonModule, MatDividerModule, MatIconModule, MatChip, NgIf, MatDialogModule, NgForOf
   ],
   templateUrl: './question-card.component.html',
   styleUrls: ['./question-card.component.scss']
@@ -29,7 +31,8 @@ export class QuestionCardComponent {
   @Output()
   refresh: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router, private notificationService: NotificationService) {
+  constructor(private router: Router, private notificationService: NotificationService,
+              public dialog: MatDialog) {
   }
 
   formattedDate = (date: any) => format(date, 'MM/dd/yyyy');
@@ -101,6 +104,26 @@ export class QuestionCardComponent {
       } else {
         console.log('Error deleting question');
       }
+    });
+  }
+
+  editQuestion(): void {
+    const dialogRef = this.dialog.open(EditQuestionDialogComponent, {
+      width: '1000px',
+      data: {
+        question: {
+          id: this.questionObject.id,
+          title: this.questionObject.title,
+          text: this.questionObject.text,
+          tags: this.questionObject.tags
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('Dialog result:', result);
+      this.refresh.emit();
     });
   }
 }

@@ -1,16 +1,16 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
-import { MatButtonModule } from "@angular/material/button";
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from "@angular/forms";
-import { MatCard } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from '@angular/material/input';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Observable, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {Component, Inject, OnInit, inject} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
+import {MatButtonModule} from "@angular/material/button";
+import {FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormControl} from "@angular/forms";
+import {MatCard} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from '@angular/material/input';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {Observable, of} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {NgForOf} from "@angular/common";
 
 @Component({
@@ -35,7 +35,7 @@ export class EditQuestionDialogComponent implements OnInit {
 
   ngOnInit() {
     this.formData = this.data;
-    this.fruits = this.data.question.tags.map((tag: any) => ({ name: tag.name }));
+    this.fruits = this.data.question.tags.map((tag: any) => ({name: tag.name}));
 
     this.tagsCtrl.valueChanges.pipe(
       debounceTime(300),
@@ -43,7 +43,6 @@ export class EditQuestionDialogComponent implements OnInit {
       switchMap(value => this.fetchTags(value))
     ).subscribe(tags => {
       console.log('Fetched tags:', tags);
-      // Handle the fetched tags as needed
     });
   }
 
@@ -75,15 +74,12 @@ export class EditQuestionDialogComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Check if the value already exists
     const exists = this.formData.question.tags.some((tag: any) => tag.name === value);
 
-    // Add our fruit if it doesn't already exist
     if (value && !exists) {
-      this.formData.question.tags.push({ id: -1, name: value });
+      this.formData.question.tags.push({id: -1, name: value});
     }
 
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -99,19 +95,17 @@ export class EditQuestionDialogComponent implements OnInit {
     }
   }
 
-  edit(fruit: any, event: MatChipEditedEvent) {
+  edit(tag: any, event: MatChipEditedEvent) {
     const value = event.value.trim();
 
-    // Remove fruit if it no longer has a name
     if (!value) {
-      this.remove(fruit);
+      this.remove(tag);
       return;
     }
 
-    // Edit existing fruit
-    const index = this.fruits.indexOf(fruit);
+    const index = this.formData.question.tags.indexOf(tag);
     if (index >= 0) {
-      this.fruits[index].name = value;
+      this.formData.question.tags[index] = {id: -1, name: value};
     }
   }
 

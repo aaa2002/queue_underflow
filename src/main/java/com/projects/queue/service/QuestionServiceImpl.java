@@ -152,4 +152,8 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionsByTag(Long tagId) {
         return questionRepository.findByTagId(tagId);
     }
+
+    public List<Question> getQuestionsByUserId(Long userId) {
+        return questionRepository.findByUserId(userId);
+    }
 }

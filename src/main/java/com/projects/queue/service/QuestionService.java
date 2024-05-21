@@ -26,4 +26,6 @@ public interface QuestionService {
     int dislikeQuestion(Long questionId, User user);
 
     List<Question> getQuestionsByTag(Long tag);
+
+    List<Question> getQuestionsByUserId(Long userId);
 }

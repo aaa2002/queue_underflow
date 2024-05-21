@@ -25,7 +25,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query(value = "DELETE FROM question_dislikers WHERE user_id = :userId", nativeQuery = true)
     void deleteAllDislikesByUserId(@Param("userId") Long userId);
 
-    Question findByUserId(Long user_id);
+    List<Question> findByUserId(Long user_id);
 
     Optional<Question> findById(Long id);
 

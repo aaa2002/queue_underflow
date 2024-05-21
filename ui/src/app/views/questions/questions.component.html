@@ -14,6 +14,25 @@
     </mat-form-field>
 
   </div>
+  <div class="filters-row2 d-flex flex-row justify-between align-center mb-2">
+    <span class="d-flex flex-row align-center">
+      <mat-checkbox [(ngModel)]="ownQuestionsOnly" (change)="fetchQuestions()"></mat-checkbox>
+      <span>Only Mine!</span>
+    </span>
+    <span class="d-flex flex-row align-center">
+      <mat-checkbox [(ngModel)]="userFilter" (change)="filterByUser()"></mat-checkbox>
+      <span>Filter By Users</span>
+    </span>
+  </div>
+  <div class="filters-row3 d-flex flex-row align-center mb-2" [@toggleFilter] style="justify-content: flex-end" *ngIf="userFilter">
+    <mat-form-field appearance="outline">
+      <mat-label>User</mat-label>
+      <mat-select [(ngModel)]="selectedUser" (ngModelChange)="applyUserFilter($event)">
+        <mat-option [value]="'all'">All</mat-option>
+        <mat-option *ngFor="let user of allUsers" [value]="user">{{user.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <app-question-card *ngFor="let question of questions"
                      [questionObject]="question" (refresh)="fetchQuestions()"
   ></app-question-card>
